@@ -1,5 +1,7 @@
 require("dotenv").config();
 import request from "request";
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 let postWebhook = (req, res) => {
     // Parse the request body from the POST
     let body = req.body;
@@ -56,6 +58,31 @@ let getWebhook = (req, res) => {
             res.sendStatus(403);
         }
     }
+}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "message": response
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('message sent!')
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
 }
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -119,30 +146,6 @@ function handlePostback(sender_psid, received_postback) {
     callSendAPI(sender_psid, response);
 }
 
-// Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
-    // Construct the message body
-    let request_body = {
-        "recipient": {
-            "id": sender_psid
-        },
-        "message": response
-    }
-
-    // Send the HTTP request to the Messenger Platform
-    request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    }, (err, res, body) => {
-        if (!err) {
-            console.log('message sent!')
-        } else {
-            console.error("Unable to send message:" + err);
-        }
-    });
-}
 
 module.exports = {
     getWebhook: getWebhook,
