@@ -2,6 +2,9 @@
 /vendor
 /.idea
 .idea/
+/node_modules
+/vendor
+/.idea
+.idea/
 .env
-# Local Netlify folder
-.netlify
+/public/bower_components
