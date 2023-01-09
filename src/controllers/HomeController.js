@@ -7,6 +7,7 @@ let getHomePage = (req, res) => {
 };
 
 let postWebhook = (req, res) => {
+    console.log('post success')
     let body = req.body;
 
     // Checks this is an event from a page subscription
@@ -42,7 +43,7 @@ let postWebhook = (req, res) => {
 }
 
 let getWebhook = (req, res) => {
-
+    console.log("get success")
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
