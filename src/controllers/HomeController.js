@@ -1,6 +1,6 @@
 require('dotenv').config();
 import request from "request";
-
+const request = require('request');
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -75,7 +75,7 @@ function callSendAPI(sender_psid, response) {
         },
         "message": response
     }
-
+    console.log(request_body);
     // Send the HTTP request to the Messenger Platform
     request({
         "uri": "https://graph.facebook.com/v2.6/me/messages",
