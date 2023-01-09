@@ -7,12 +7,10 @@ let getHomePage = (req, res) => {
 };
 
 let postWebhook = (req, res) => {
-    console.log('post success')
     let body = req.body;
 
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
-
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function (entry) {
 
@@ -43,7 +41,6 @@ let postWebhook = (req, res) => {
 }
 
 let getWebhook = (req, res) => {
-    console.log("get success")
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
@@ -73,7 +70,7 @@ let getWebhook = (req, res) => {
 function handleMessage(sender_psid, received_message) {
 
     let response;
-
+    console.log("recieve message");
     // Checks if the message contains text
     if (received_message.text) {
         // Create the payload for a basic text message, which
