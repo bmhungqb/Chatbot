@@ -8,14 +8,14 @@ let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// config view engine
+//config view Engine
 viewEngine(app);
 
-// config web routes
+//config web routes
 webRoutes(app);
 
 let port = process.env.PORT || 8080;
 
 app.listen(port, () => {
-    console.log("app is running at port: " + port);
+    console.log("App is running at the port: " + port);
 })
