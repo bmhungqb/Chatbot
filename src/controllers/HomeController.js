@@ -70,7 +70,6 @@ let getWebhook = (req, res) => {
 function handleMessage(sender_psid, received_message) {
 
     let response;
-    console.log("recieve message");
     // Checks if the message contains text
     if (received_message.text) {
         // Create the payload for a basic text message, which
@@ -109,6 +108,7 @@ function handleMessage(sender_psid, received_message) {
     }
 
     // Send the response message
+    console.log(response);
     callSendAPI(sender_psid, response);
 }
 
