@@ -1,6 +1,5 @@
 require('dotenv').config();
 import request from "request";
-const request = require('request');
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
